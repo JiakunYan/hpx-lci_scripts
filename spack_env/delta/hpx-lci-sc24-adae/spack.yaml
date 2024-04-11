@@ -1,0 +1,22 @@
+# This is a Spack Environment file.
+#
+# It describes a set of packages to be installed, along with
+# configuration settings.
+spack:
+  # Include additional compilers and external packages configuration
+  # May need to change due to package upgrade
+  include:
+  - ../include/packages.yaml
+  - ../include/compilers.yaml
+  # Actual package spec to install
+  specs:
+  - octotiger@git.bef65a2a702b850895f0940ffc2a568fe32d3e65 %gcc@11.2.1
+    ^hpx@git.52eefeefae83a2811f6600bce8303783cb092a7d +examples networking=lci,mpi max_cpu_count=128 
+    ^lci@git.7be8cc1f40a4dd3d088dbf59217964da113336f1 +examples+tests+benchmarks fabric=ofi
+    ^cray-mpich
+    ^silo~mpi
+  - hpx-bench@git.a852f31cf93011e3bff36c29626a1f4aad90da3b
+  view: true
+  concretizer:
+    unify: true
+    reuse: false

@@ -1,0 +1,92 @@
+compilers:
+- compiler:
+    spec: gcc@=8.5.0
+    paths:
+      cc: /usr/bin/gcc
+      cxx: /usr/bin/g++
+      f77: /usr/bin/gfortran
+      fc: /usr/bin/gfortran
+    flags: {}
+    operating_system: rhel8
+    target: x86_64
+    modules: []
+    environment: {}
+    extra_rpaths: []
+- compiler:
+    spec: gcc@=11.4.0
+    paths:
+      cc: /sw/spack/deltas11-2023-03/apps/linux-rhel8-x86_64/gcc-8.5.0/gcc-11.4.0-yycklku/bin/gcc
+      cxx: /sw/spack/deltas11-2023-03/apps/linux-rhel8-x86_64/gcc-8.5.0/gcc-11.4.0-yycklku/bin/g++
+      f77: /sw/spack/deltas11-2023-03/apps/linux-rhel8-x86_64/gcc-8.5.0/gcc-11.4.0-yycklku/bin/gfortran
+      fc: /sw/spack/deltas11-2023-03/apps/linux-rhel8-x86_64/gcc-8.5.0/gcc-11.4.0-yycklku/bin/gfortran
+    flags: {}
+    operating_system: rhel8
+    target: x86_64
+    modules: []
+    environment: {}
+    extra_rpaths: []
+- compiler:
+    spec: cce@=16.0.1
+    paths:
+      cc: /opt/cray/pe/cce/16.0.1/bin/craycc
+      cxx: /opt/cray/pe/cce/16.0.1/bin/craycxx
+      f77: null
+      fc: /opt/cray/pe/cce/16.0.1/bin/crayftn
+    flags: {}
+    operating_system: rhel8
+    target: x86_64
+    modules: []
+    environment: {}
+    extra_rpaths: []
+- compiler:
+    spec: gcc@=11.2
+    paths:
+      cc: /opt/rh/gcc-toolset-11/root/usr/bin/gcc
+      cxx: /opt/rh/gcc-toolset-11/root/usr/bin/g++
+      f77: null
+      fc: /opt/rh/gcc-toolset-11/root/usr/bin/gfortran
+    flags: {}
+    operating_system: rhel8
+    target: x86_64
+    modules: []
+    environment: {}
+    extra_rpaths: []
+- compiler:
+    spec: nvhpc@=23.3
+    paths:
+      cc: /opt/nvidia/hpc_sdk/Linux_x86_64/23.3/compilers/bin/nvc
+      cxx: /opt/nvidia/hpc_sdk/Linux_x86_64/23.3/compilers/bin/nvc++
+      f77: null
+      fc: /opt/nvidia/hpc_sdk/Linux_x86_64/23.3/compilers/bin/nvfortran
+    flags: {}
+    operating_system: rhel8
+    target: x86_64
+    modules: []
+    environment: {}
+    extra_rpaths: []
+- compiler:
+    spec: gcc@=12.3.0
+    paths:
+      cc: /u/jiakuny/workspace/spack/opt/spack/linux-rhel8-zen3/gcc-11.4.0/gcc-12.3.0-6z74qxwlsdandmnyqmij3xt4peykm2q6/bin/gcc
+      cxx: /u/jiakuny/workspace/spack/opt/spack/linux-rhel8-zen3/gcc-11.4.0/gcc-12.3.0-6z74qxwlsdandmnyqmij3xt4peykm2q6/bin/g++
+      f77: null
+      fc: /u/jiakuny/workspace/spack/opt/spack/linux-rhel8-zen3/gcc-11.4.0/gcc-12.3.0-6z74qxwlsdandmnyqmij3xt4peykm2q6/bin/gfortran
+    flags: {}
+    operating_system: rhel8
+    target: x86_64
+    modules: []
+    environment: {}
+    extra_rpaths: []
+- compiler:
+    spec: gcc@=11.2.1
+    paths:
+      cc: /opt/rh/gcc-toolset-11/root/usr/bin/gcc
+      cxx: /opt/rh/gcc-toolset-11/root/usr/bin/g++
+      f77: /opt/rh/gcc-toolset-11/root/usr/bin/gfortran
+      fc: /opt/rh/gcc-toolset-11/root/usr/bin/gfortran
+    flags: {}
+    operating_system: rhel8
+    target: x86_64
+    modules: []
+    environment: {}
+    extra_rpaths: []

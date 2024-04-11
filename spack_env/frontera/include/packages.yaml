@@ -1,0 +1,145 @@
+packages:
+  perl:
+    externals:
+    - spec: perl@5.16.3~cpanm+opcode+open+shared+threads
+      prefix: /usr
+  binutils:
+    externals:
+    - spec: binutils@2.37
+      prefix: /opt/apps/gcc/12.2.0
+    - spec: binutils@2.27.44
+      prefix: /usr
+  coreutils:
+    externals:
+    - spec: coreutils@8.22
+      prefix: /usr
+  diffutils:
+    externals:
+    - spec: diffutils@3.3
+      prefix: /usr
+  findutils:
+    externals:
+    - spec: findutils@4.5.11
+      prefix: /usr
+  gawk:
+    externals:
+    - spec: gawk@4.0.2
+      prefix: /usr
+  openssh:
+    externals:
+    - spec: openssh@8.5p1-hpn15v2
+      prefix: /usr
+  openssl:
+    externals:
+    - spec: openssl@1.0.2k-fips
+      prefix: /usr
+  tar:
+    externals:
+    - spec: tar@1.26
+      prefix: /usr
+  autoconf:
+    externals:
+    - spec: autoconf@2.69
+      prefix: /usr
+  automake:
+    externals:
+    - spec: automake@1.13.4
+      prefix: /usr
+  bison:
+    externals:
+    - spec: bison@3.0.4
+      prefix: /usr
+  cmake:
+    externals:
+    - spec: cmake@3.24.2
+      prefix: /opt/apps/cmake/3.24.2
+    - spec: cmake@2.8.12.2
+      prefix: /usr
+  curl:
+    externals:
+    - spec: curl@7.29.0+ldap
+      prefix: /usr
+  cvs:
+    externals:
+    - spec: cvs@1.11.23
+      prefix: /usr
+  doxygen:
+    externals:
+    - spec: doxygen@1.8.5+graphviz~mscgen
+      prefix: /usr
+  flex:
+    externals:
+    - spec: flex@2.5.37+lex
+      prefix: /usr
+  git:
+    externals:
+    - spec: git@2.24.1+tcltk
+      prefix: /opt/apps/git/2.24.1
+    - spec: git@1.8.3.1~tcltk
+      prefix: /usr
+  gmake:
+    externals:
+    - spec: gmake@3.82
+      prefix: /usr
+  groff:
+    externals:
+    - spec: groff@1.22.2
+      prefix: /usr
+  libtool:
+    externals:
+    - spec: libtool@2.4.2
+      prefix: /usr
+  m4:
+    externals:
+    - spec: m4@1.4.16
+      prefix: /usr
+  meson:
+    externals:
+    - spec: meson@0.55.1
+      prefix: /usr
+  ninja:
+    externals:
+    - spec: ninja@1.10.2
+      prefix: /usr
+  pkg-config:
+    externals:
+    - spec: pkg-config@0.27.1
+      prefix: /usr
+  subversion:
+    externals:
+    - spec: subversion@1.7.14
+      prefix: /usr
+  swig:
+    externals:
+    - spec: swig@2.0.10
+      prefix: /usr
+  texinfo:
+    externals:
+    - spec: texinfo@5.1
+      prefix: /usr
+  slurm:
+    externals:
+    - spec: slurm@22.05.9
+      prefix: /usr
+  hwloc:
+    externals:
+    - spec: hwloc@1.11.12
+      prefix: /opt/apps/hwloc/1.11.12
+    - spec: hwloc@1.11.8
+      prefix: /usr
+    - spec: hwloc@1.11.8
+      prefix: /usr/local
+  python:
+    externals:
+    - spec: python@2.7.5+bz2+crypt+ctypes+dbm+lzma+nis+pyexpat+pythoncmd+readline+sqlite3+ssl~tkinter+uuid+zlib
+      prefix: /usr
+    - spec: python@3.6.8+bz2+crypt+ctypes+dbm+lzma+nis+pyexpat~pythoncmd+readline+sqlite3+ssl~tkinter+uuid+zlib
+      prefix: /usr
+  rdma-core:
+    externals:
+    - spec: rdma-core@43.0
+      prefix: /usr
+  intel-oneapi-mpi:
+    externals:
+    - spec: intel-oneapi-mpi@2021.9.0
+      prefix: /opt/intel/oneapi/
