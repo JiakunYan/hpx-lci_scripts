@@ -11,7 +11,7 @@ from script_common import *
 baseline = {
     "name": "lci",
     "spack_env": "hpx-lcw-sc24",
-    "nnodes": [64, 128, 256],
+    "nnodes": [256],
     "ntasks_per_node": 2,
     "griddim": 8,
     "max_level": 5,
@@ -38,8 +38,8 @@ matrix_outside = ["nnodes"]
 matrix_inside = []
 time_limit = 1
 
+# LCI v.s. MPI
 configs = [
-    # LCI v.s. MPI
     {**baseline, "name": "lci", "parcelport": "lci"},
     {**baseline, "name": "mpi_a", "parcelport": "mpi", "sendimm": 0},
     {**baseline, "name": "mpi", "parcelport": "mpi"},

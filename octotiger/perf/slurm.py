@@ -19,7 +19,7 @@ print("Config: " + json.dumps(config))
 start_time = time.time()
 # pshell.run(f"cd {current_path}/run")
 scenario = "rs"
-cmd = (get_platform_config("get_srun_args", config) + ["-u"] +
+cmd = (get_platform_config("get_srun_args", config) + ["-u", "-l"] +
        [f"{current_path}/profile_wrapper.py"])
 pshell.run(cmd)
 end_time = time.time()

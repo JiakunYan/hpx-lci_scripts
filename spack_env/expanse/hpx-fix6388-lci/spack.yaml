@@ -17,5 +17,5 @@ spack:
       path: ../../../../hpx-fix-6388
       spec: hpx@=master
     lci:
-      path: ../../../../LC
+      path: ../../../../lci
       spec: lci@=master

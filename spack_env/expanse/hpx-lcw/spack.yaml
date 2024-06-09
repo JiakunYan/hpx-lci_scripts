@@ -15,9 +15,6 @@ spack:
     unify: true
     reuse: false
   develop:
-    mpich:
-      path: ../../../../mpich-master
-      spec: mpich@=master
     hpx_bench:
       path: ../../../../hpx_bench
       spec: hpx-bench@=master
@@ -28,5 +25,5 @@ spack:
       path: ../../../../lcw
       spec: lcw@=master
     lci:
-      path: ../../../../LC
+      path: ../../../../lci
       spec: lci@=master

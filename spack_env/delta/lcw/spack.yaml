@@ -11,7 +11,7 @@ spack:
     unify: true
   develop:
     lci:
-      path: ../../../../LC
+      path: ../../../../lci
       spec: lci@=master
     lcw:
       path: ../../../../lcw

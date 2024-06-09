@@ -1,7 +1,11 @@
 from script_common_lcw import *
 
 def get_hpx_environ_setting(config):
-    ret = get_lci_environ_setting(config)
+    ret = {}
+    if config["parcelport"] == "lci":
+        ret = get_lci_environ_setting(config)
+    elif config["parcelport"] == "lcw":
+        ret = get_lcw_environ_setting(config)
     if "reg_mem" in config and config["reg_mem"] or config["progress_type"] == "worker":
         # We only use the registration cache when only one progress thread is doing the registration.
         ret["LCI_USE_DREG"] = "0"
@@ -64,4 +68,8 @@ def get_hpx_args(config):
                                      "enable_sendmc", ["lci"])
     args = append_pp_config_if_exist(args, "--hpx:ini=hpx.parcel.{}.zero_copy_optimization={}", config,
                                      "zero_copy_optimization", ["mpi", "lci"])
+    args = append_pp_config_if_exist(args, "--hpx:ini=hpx.parcel.{}.global_progress={}", config,
+                                     "global_progress", ["lci"])
+    args = append_pp_config_if_exist(args, "--hpx:ini=hpx.parcel.{}.ndevices_fake={}", config,
+                                     "ndevices_fake", ["lci"])
     return args

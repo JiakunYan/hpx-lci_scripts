@@ -22,7 +22,7 @@ class DeltaConfig(PlatformConfigBase):
 
     @property
     def additional_sbatch_args(self):
-        return []
+        return ["--exclusive", "--mem=0"]
 
     def get_srun_args(self, config):
         return ["srun"]

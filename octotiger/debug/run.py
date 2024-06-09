@@ -16,7 +16,7 @@ baseline = {
     "ntasks_per_node": 4,
     "griddim": 8,
     "max_level": 5,
-    "stop_step": 5,
+    "stop_step": 20,
     "zc_threshold": 8192,
     "scenario": "rs",
     "parcelport": "lci",
@@ -37,7 +37,7 @@ baseline = {
 }
 matrix_outside = ["nnodes"]
 matrix_inside = []
-time_limit = 2
+time_limit = 1
 
 if platformConfig.name == "perlmutter":
     baseline["spack_env"] = "hpx-lci-bell24"
@@ -48,11 +48,9 @@ if platformConfig.name == "perlmutter":
     baseline["scenario"] = "dwd-l10-close_to_merger"
 
 if platformConfig.name == "delta":
-    baseline["spack_env"] = "hpx-lcw-sc24-griddim2"
+    baseline["spack_env"] = "hpx-mpich"
     baseline["nnodes"] = [32]
-    baseline["ntasks_per_node"] = 1
-    baseline["stop_step"] = 5
-    baseline["griddim"] = 2
+    baseline["ntasks_per_node"] = 2
     # baseline["scenario"] = "dwd-l10-beginning"
     # baseline["scenario"] = "dwd-l10-close_to_merger"
 
@@ -63,15 +61,15 @@ if platformConfig.name == "polaris":
     baseline["ngpus"] = 1
 
 if platformConfig.name == "rostam":
-    baseline["spack_env"] = "hpx-lcw-openmpi"
-    baseline["nnodes"] = [12]
+    baseline["spack_env"] = "hpx-mpich-debug"
+    baseline["nnodes"] = [2]
     baseline["ntasks_per_node"] = 1
     baseline["max_level"] = 5
     baseline["griddim"] = 8
 
 if platformConfig.name == "expanse":
-    baseline["spack_env"] = "hpx-lcw-sc24"
-    baseline["nnodes"] = [2, 4, 8, 16, 32]
+    baseline["spack_env"] = "hpx-lcw"
+    baseline["nnodes"] = [32]
     baseline["ntasks_per_node"] = 2
     baseline["griddim"] = 8
     # baseline["scenario"] = "dwd-l10-close_to_merger"
@@ -90,8 +88,19 @@ configs = [
     # {**baseline, "name": "mpi_a", "parcelport": "mpi", "sendimm": 0},
     # {**baseline, "name": "mpi", "parcelport": "mpi"},
     # {**baseline, "name": "lci_d1", "parcelport": "lci", "ndevices": 1},
+    # {**baseline, "name": "lci_d1_f7", "parcelport": "lci", "ndevices": 1, "ndevices_fake": 7},
+    {**baseline, "name": "lci_d2", "parcelport": "lci", "ndevices": 2},
+    {**baseline, "name": "lci_d4", "parcelport": "lci", "ndevices": 4},
+    # {**baseline, "name": "lci_d4_fake", "parcelport": "lci", "ndevices": 4},
+    # {**baseline, "name": "lci_d4_g", "parcelport": "lci", "ndevices": 4, "global_progress": 1},
+    # {**baseline, "name": "lci_d8_g", "parcelport": "lci", "ndevices": 8, "global_progress": 1},
     # {**baseline, "name": "lci_mutex", "parcelport": "lci", "cq_type": "array_mutex"},
-    {**baseline, "name": "lci", "parcelport": "lci"},
+    # {**baseline, "name": "lci", "parcelport": "lci"},
+    # {**baseline, "name": "lci-lock", "parcelport": "lci", "lock_mode": "send,recv,poll"},
+    # {**baseline, "name": "lcw", "parcelport": "lcw"},
+    # {**baseline, "name": "lcw-d1", "parcelport": "lcw", "ndevices": 1},
+    # {**baseline, "name": "lcw-d4-p", "parcelport": "lcw", "ndevices": 4, "spack_env": "hpx-mpich-pcounter"},
+    # {**baseline, "name": "lcw-d4", "parcelport": "lcw", "ndevices": 4},
     # {**baseline, "name": "lci_mpi", "parcelport": "lci",
     #  "lock_mode": "global",
     #  "protocol": "sendrecv", "ndevices": 1,
@@ -127,10 +136,10 @@ configs = [
     # {**baseline, "name": "lci_followup_sync", "protocol": "sendrecv", "enable_sendmc": 1, "comp_type_followup": "sync"},
     # {**baseline, "name": "lci_followup_2queue", "ncomps": 2},
     # # ndevices + progress_type
-    {**baseline, "name": "lci_mt_d1_c1", "ndevices": 1, "progress_type": "worker", "ncomps": 1},
+    # {**baseline, "name": "lci_mt_d1_c1", "ndevices": 1, "progress_type": "worker", "ncomps": 1},
     # {**baseline, "name": "lci_mt_d2_c1", "ndevices": 2, "progress_type": "worker", "ncomps": 1},
     # {**baseline, "name": "lci_mt_d4_c1", "ndevices": 4, "progress_type": "worker", "ncomps": 1},
-    {**baseline, "name": "lci_pin_d1_c1", "ndevices": 1, "progress_type": "rp", "ncomps": 1},
+    # {**baseline, "name": "lci_pin_d1_c1", "ndevices": 1, "progress_type": "rp", "ncomps": 1},
     # {**baseline, "name": "lci_pin_d2_c1", "ndevices": 2, "progress_type": "rp", "ncomps": 1},
     # {**baseline, "name": "lci_pin_d4_c1", "ndevices": 4, "progress_type": "rp", "ncomps": 1},
     # {**baseline, "name": "lci-griddim2", "parcelport": "lci",

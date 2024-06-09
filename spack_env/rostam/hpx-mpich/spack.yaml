@@ -5,7 +5,8 @@
 spack:
   # add package specs to the `specs` list
   specs:
-  - octotiger@master ^hpx networking=lci,lcw,mpi ^mpich+vci+slurm~hydra~fortran netmod=ucx pmi=slurm 
+  - octotiger@master ^hpx networking=lci,lcw,mpi 
+    ^mpich+vci+slurm~hydra~fortran netmod=ucx pmi=slurm 
     ^ucx+verbs+rc+ud+mlx5_dv+ib_hw_tm+dc+thread_multiple+knem+cma+xpmem+rdmacm
     ^silo~mpi
   - hpx-bench@master
@@ -27,5 +28,5 @@ spack:
       path: ../../../../lcw
       spec: lcw@=master
     lci:
-      path: ../../../../LC
+      path: ../../../../lci
       spec: lci@=master

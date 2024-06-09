@@ -15,7 +15,7 @@ baseline = {
     "ntasks_per_node": 1,
     "griddim": 8,
     "max_level": 5,
-    "stop_step": 5,
+    "stop_step": 20,
     "zc_threshold": 8192,
     "scenario": "rs",
     "parcelport": "lci",
@@ -108,10 +108,10 @@ configs2 = [
     # {**baseline, "name": "lci_global_b_d8", "ndevices": 8, "parcelport": "lci", "lock_mode": "global_b"},
     # # ndevices + progress_type
     {**baseline, "name": "lci_mt_d1_c1", "ndevices": 1, "progress_type": "worker", "ncomps": 1},
-    # {**baseline, "name": "lci_mt_d2_c1", "ndevices": 2, "progress_type": "worker", "ncomps": 1},
-    # {**baseline, "name": "lci_mt_d4_c1", "ndevices": 4, "progress_type": "worker", "ncomps": 1},
-    # {**baseline, "name": "lci_mt_d8_c1", "ndevices": 8, "progress_type": "worker", "ncomps": 1},
-    {**baseline, "name": "lci_pin_d1_c1", "ndevices": 1, "progress_type": "rp", "ncomps": 1},
+    {**baseline, "name": "lci_mt_d2_c1", "ndevices": 2, "progress_type": "worker", "ncomps": 1},
+    {**baseline, "name": "lci_mt_d4_c1", "ndevices": 4, "progress_type": "worker", "ncomps": 1},
+    {**baseline, "name": "lci_mt_d8_c1", "ndevices": 8, "progress_type": "worker", "ncomps": 1},
+    # {**baseline, "name": "lci_pin_d1_c1", "ndevices": 1, "progress_type": "rp", "ncomps": 1},
     # # # Aggregation
     # {**baseline, "name": "lci_a", "sendimm": 0},
 ]

@@ -27,4 +27,8 @@ class ExpanseConfig(PlatformConfigBase):
         else:
             srun_pmi_option = ["--mpi=pmix"]
         return ["srun"] + srun_pmi_option
+        # return ["srun", "--mpi=pmi2"]
+
+    def custom_env(self, config):
+        return {"PMI_MAX_VAL_SIZE": "512"}
 

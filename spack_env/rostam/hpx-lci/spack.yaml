@@ -17,5 +17,5 @@ spack:
       path: ../../../../hpx
       spec: hpx@=master
     lci:
-      path: ../../../../LC
+      path: ../../../../lci
       spec: lci@=master

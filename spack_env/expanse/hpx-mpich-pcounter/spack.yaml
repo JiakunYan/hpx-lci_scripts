@@ -5,25 +5,31 @@
 spack:
   # add package specs to the `specs` list
   specs:
-  - octotiger@master%gcc@11.2.1 griddim=6
-    ^hpx+examples networking=lci,lcw,mpi max_cpu_count=128 
-    ^lci+examples+tests+benchmarks fabric=ofi
-    ^cray-mpich
+  - octotiger@master%gcc 
+    ^hpx+lci_pp_pcounter+lcw_pp_pcounter networking=lci,lcw,mpi max_cpu_count=128
+    ^lcw+pcounter
+    ^lci+examples+tests+benchmarks+pcounter
+    ^mpich+vci+slurm~hydra~fortran netmod=ucx pmi=slurm 
+    ^ucx+verbs+rc+ud+mlx5_dv+ib_hw_tm+dc+thread_multiple+knem+cma+xpmem+rdmacm
     ^silo~mpi
   - hpx-bench@master
   view: true
   concretizer:
     unify: true
+    reuse: false
   develop:
+    mpich:
+      path: ../../../../mpich
+      spec: mpich@=master
     hpx_bench:
       path: ../../../../hpx_bench
       spec: hpx-bench@=master
     hpx:
       path: ../../../../hpx-lcw
       spec: hpx@=master
-    lci:
-      path: ../../../../LC
-      spec: lci@=master
     lcw:
       path: ../../../../lcw
       spec: lcw@=master
+    lci:
+      path: ../../../../lci
+      spec: lci@=master

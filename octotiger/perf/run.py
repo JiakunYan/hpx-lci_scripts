@@ -11,12 +11,12 @@ import time
 
 baseline = {
     "name": "mpi",
-    "spack_env": "hpx-lcw",
-    "nnodes": [32],
+    "spack_env": "hpx-mpich",
+    "nnodes": [12],
     "ntasks_per_node": 1,
     "griddim": 8,
     "max_level": 5,
-    "stop_step": 5,
+    "stop_step": 20,
     "zc_threshold": 8192,
     "scenario": "rs",
     "parcelport": "lci",
@@ -34,20 +34,22 @@ baseline = {
     "reg_mem": 1,
     "ndevices": 2,
     "ncomps": 1,
-    "perf": "record"
+    "lcw_backend": "mpi",
+    "use_stream": 0,
+    "perf": "stat"
 }
-time_limit=3
+time_limit=1
 
 if platformConfig.name == "perlmutter":
     baseline["ngpus"] = 1
 if platformConfig.name == "expanse":
-    baseline["spack_env"] = "hpx-lcw-sc24"
+    baseline["spack_env"] = "hpx-mpich-pcounter"
     baseline["ntasks_per_node"] = 2
     baseline["nnodes"] = [32]
 if platformConfig.name == "delta":
-    baseline["spack_env"] = "hpx-lcw-sc24"
+    baseline["spack_env"] = "hpx-mpich"
     baseline["ntasks_per_node"] = 2
-    baseline["nnodes"] = [32]
+    baseline["nnodes"] = [16]
 if platformConfig.name == "frontera":
     baseline["spack_env"] = "hpx-lcw-sc24"
     baseline["nnodes"] = [32]
@@ -56,11 +58,9 @@ configs = [
     # {**baseline, "name": "mpi", "parcelport": "mpi"},
     # {**baseline, "name": "mpi_a", "parcelport": "mpi", "sendimm": 0},
     {**baseline, "name": "lci", "parcelport": "lci"},
-    {**baseline, "name": "lci_global_b", "parcelport": "lci", "lock_mode": "global_b"},
-    # {**baseline, "name": "lci_pin", "progress_type": "pin"},
-    # {**baseline, "name": "lci_mutex", "parcelport": "lci", "cq_type": "array_mutex"},
+    {**baseline, "name": "lci_f7", "parcelport": "lci", "ndevices_fake": 7},
     # {**baseline, "name": "mpi", "parcelport": "mpi", "sendimm": 0},
-    # {**baseline, "name": "lcw", "parcelport": "lcw", "sendimm": 0},
+    # {**baseline, "name": "lcw-perf", "parcelport": "lcw", "ndevices": 2},
     # {**baseline, "name": "lcw_i", "parcelport": "lcw"},
     # {**baseline, "name": "lcw_i_mt_d2_c1", "parcelport": "lcw", "ndevices": 2, "progress_type": "worker", "ncomps": 1},
     # {**baseline, "name": "lcw_i_mt_d28_c1", "parcelport": "lcw", "ndevices": 28, "progress_type": "worker", "ncomps": 1},
