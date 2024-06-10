@@ -30,9 +30,9 @@ class OokamiConfig(PlatformConfigBase):
             return "all-nodes"
 
     def get_srun_args(self, config):
-        if "parcelport" not in config:
+        if "hpx:parcelport" not in config:
             srun_pmi_option = ["--mpi=pmi2"]
-        elif config["parcelport"] == "lci":
+        elif config["hpx:parcelport"] == "lci":
             srun_pmi_option = ["--mpi=pmi2"]
         else:
             srun_pmi_option = ["--mpi=pmix"]

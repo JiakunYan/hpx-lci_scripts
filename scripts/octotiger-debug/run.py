@@ -10,6 +10,7 @@ from script_common import *
 
 baseline = {
     "name": "lci",
+    "root_packages": "octotiger",
     "spack_env": "hpx-mpich",
     "nnodes": [32],
     "ntasks_per_node": 2,
@@ -35,7 +36,7 @@ baseline = {
 }
 matrix_outside = ["nnodes"]
 matrix_inside = []
-time_limit = 1
+time_limit = 2
 
 if platformConfig.name == "rostam":
     baseline["spack_env"] = "hpx-mpich-ofi"
@@ -49,20 +50,20 @@ if platformConfig.name == "expanse":
 
 configs = [
     # # # LCI v.s. MPI
-    # {**baseline, "name": "mpi_a", "parcelport": "mpi", "sendimm": 0},
-    # {**baseline, "name": "mpi", "parcelport": "mpi"},
-    # {**baseline, "name": "lci", "parcelport": "lci"},
-    # {**baseline, "name": "lci-ibv", "parcelport": "lci", "spack_env": "hpx-mpich"},
-    # {**baseline, "name": "lcw_lci", "parcelport": "lcw", "lcw_backend": "lci"},
-    # {**baseline, "name": "lcw_cont_d2", "parcelport": "lcw", "comp_type": "cont"},
-    # {**baseline, "name": "lcw_req_d2", "parcelport": "lcw", "comp_type": "req"},
-    # {**baseline, "name": "lcw_cont_d1", "parcelport": "lcw", "comp_type": "cont", "ndevices": 1},
-    # {**baseline, "name": "lcw_req_d1", "parcelport": "lcw", "comp_type": "req", "ndevices": 1},
-    # {**baseline, "name": "lcw_cont_d4", "parcelport": "lcw", "comp_type": "cont", "ndevices": 4},
-    # {**baseline, "name": "lcw_req_d4", "parcelport": "lcw", "comp_type": "req", "ndevices": 4},
-    {**baseline, "name": "lcw_cont_d2_s", "parcelport": "lcw", "comp_type": "cont", "use_stream": 1},
-    {**baseline, "name": "lcw_cont_d1_s", "parcelport": "lcw", "comp_type": "cont", "ndevices": 1, "use_stream": 1},
-    {**baseline, "name": "lcw_cont_d4_s", "parcelport": "lcw", "comp_type": "cont", "ndevices": 4, "use_stream": 1},
+    {**baseline, "name": "mpi_a", "hpx:parcelport": "mpi", "sendimm": 0},
+    {**baseline, "name": "mpi", "hpx:parcelport": "mpi"},
+    {**baseline, "name": "lci", "hpx:parcelport": "lci"},
+    {**baseline, "name": "lci-ibv", "hpx:parcelport": "lci", "spack_env": "hpx-mpich"},
+    {**baseline, "name": "lcw_lci", "hpx:parcelport": "lcw", "lcw:backend": "lci"},
+    {**baseline, "name": "lcw_cont_d2", "hpx:parcelport": "lcw", "lcw:comp_type": "cont"},
+    {**baseline, "name": "lcw_req_d2", "hpx:parcelport": "lcw", "lcw:comp_type": "req"},
+    {**baseline, "name": "lcw_cont_d1", "hpx:parcelport": "lcw", "lcw:comp_type": "cont", "hpx:ndevices": 1},
+    {**baseline, "name": "lcw_req_d1", "hpx:parcelport": "lcw", "lcw:comp_type": "req", "hpx:ndevices": 1},
+    {**baseline, "name": "lcw_cont_d4", "hpx:parcelport": "lcw", "lcw:comp_type": "cont", "hpx:ndevices": 4},
+    {**baseline, "name": "lcw_req_d4", "hpx:parcelport": "lcw", "lcw:comp_type": "req", "hpx:ndevices": 4},
+    # {**baseline, "name": "lcw_cont_d2_s", "hpx:parcelport": "lcw", "lcw:comp_type": "cont", "lcw:use_stream": 1},
+    # {**baseline, "name": "lcw_cont_d1_s", "hpx:parcelport": "lcw", "lcw:comp_type": "cont", "hpx:ndevices": 1, "lcw:use_stream": 1},
+    # {**baseline, "name": "lcw_cont_d4_s", "hpx:parcelport": "lcw", "lcw:comp_type": "cont", "hpx:ndevices": 4, "lcw:use_stream": 1},
 ]
 
 if __name__ == "__main__":

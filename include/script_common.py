@@ -5,8 +5,9 @@ import copy
 import glob
 import json
 import itertools
-from platform_config_base import *
+from platform_configs.platform_config_base import *
 import pshell
+
 
 def rm(dir):
     try:
@@ -14,6 +15,7 @@ def rm(dir):
         print(f"Directory {dir} has been deleted successfully.")
     except OSError as e:
         print(f"Error: {dir} : {e.strerror}")
+
 
 def mv(source, destination):
     try:
@@ -31,6 +33,7 @@ def mv(source, destination):
     except shutil.Error as e:
         print(f"Error: Failed to move '{source}' to '{destination}': {e}")
 
+
 def mkdir_s(dir):
     if os.path.exists(dir):
         file_str = ""
@@ -38,7 +41,7 @@ def mkdir_s(dir):
             for file in files:
                 file_str += os.path.join(root, file) + "\n"
         prompt = (("{} directory exists with the following files:\n\n {}\n"
-                  "Are you sure to remove it | continue with it | or abort? [r|c|A]")
+                   "Are you sure to remove it | continue with it | or abort? [r|c|A]")
                   .format(dir, file_str))
         print(prompt)
         x = input()
@@ -57,11 +60,13 @@ def mkdir_s(dir):
     if not os.path.exists(dir):
         os.mkdir(dir)
 
+
 def getenv_or(key, default):
     if key in os.environ:
         return os.environ[key]
     else:
         return default
+
 
 def get_config(config, key, default):
     if key in config and config[key] is not None:
@@ -69,16 +74,30 @@ def get_config(config, key, default):
     else:
         return default
 
+
 def append_config_if_exist(args, arg, config, key):
     if key in config:
-        args.append(arg.format(config[key]))
+        # args.append(arg.format(config[key]))
+        args += arg.format(config[key]).split(" ")
     return args
+
+
+def set_env_if_exist(environ, env_var, config, key):
+    if key in config:
+        environ[env_var] = config[key]
+    return environ
+
+def set_config_if_not_exist(config, pairs):
+    for key, val in pairs.items():
+        if key not in config:
+            config[key] = val
 
 def get_current_script_path():
     if "CURRENT_SCRIPT_PATH" in os.environ:
         return os.environ["CURRENT_SCRIPT_PATH"]
     else:
         return os.path.realpath(sys.argv[0])
+
 
 def get_module():
     init_file = get_platform_config("module_init_file")
@@ -98,8 +117,10 @@ def get_module():
     module = getattr(__import__(name, fromlist=["module"]), "module")
     return module
 
+
 def module_list():
     os.system("module list")
+
 
 def spack_env_activate(env):
     _, ret_stderr = pshell.run("spack env activate {}".format(env), to_print=False)
@@ -116,6 +137,7 @@ def spack_env_activate(env):
     # if ret_stdout:
     #     pshell.run(ret_stdout.replace("\n", " ").strip()[:-1], to_print=False)
 
+
 def submit_pbs_job(job_file, tag, nnodes, configs, time, name, partition, qos, extra_args):
     common_config = intersect_dicts(configs)
     if name is None:
@@ -123,7 +145,7 @@ def submit_pbs_job(job_file, tag, nnodes, configs, time, name, partition, qos, e
     ntasks_per_node = 1
     if "ntasks_per_node" in common_config:
         ntasks_per_node = common_config["ntasks_per_node"]
-    job_name="{}-n{}-t{}-{}".format(tag, nnodes, ntasks_per_node, name)
+    job_name = "{}-n{}-t{}-{}".format(tag, nnodes, ntasks_per_node, name)
     output_filename = "./run/{}/".format(job_name)
     if not os.path.exists(output_filename):
         os.mkdir(output_filename)
@@ -142,6 +164,7 @@ def submit_pbs_job(job_file, tag, nnodes, configs, time, name, partition, qos, e
     command = ["qsub"] + pbs_args + [job_file]
     pshell.run(command)
 
+
 def submit_slurm_job(job_file, tag, nnodes, configs, time, name, partition, qos, extra_args):
     common_config = intersect_dicts(configs)
     if name is None:
@@ -149,9 +172,10 @@ def submit_slurm_job(job_file, tag, nnodes, configs, time, name, partition, qos,
     ntasks_per_node = 1
     if "ntasks_per_node" in common_config:
         ntasks_per_node = common_config["ntasks_per_node"]
-    job_name="n{}-t{}-{}".format(nnodes, ntasks_per_node, name)
+    job_name = "n{}-t{}-{}".format(nnodes, ntasks_per_node, name)
     output_filename = "./run/slurm_output.{}.%x.j%j.out".format(tag)
     sbatch_args = ["--export=ALL",
+                   "--exclusive",
                    f"--nodes={nnodes}",
                    f"--job-name={job_name}",
                    f"--output={output_filename}",
@@ -181,6 +205,7 @@ def submit_slurm_job(job_file, tag, nnodes, configs, time, name, partition, qos,
     command = f"sbatch {' '.join(sbatch_args)} {job_file}"
     pshell.run(command)
 
+
 def submit_job(job_file, tag, nnodes, configs, time=1, name=None, partition=None, qos=None, extra_args=None):
     common_config = intersect_dicts(configs)
     pshell.run("export CURRENT_PATH={}".format(get_current_script_path()))
@@ -191,7 +216,9 @@ def submit_job(job_file, tag, nnodes, configs, time=1, name=None, partition=None
     elif scheduler == "pbs":
         submit_pbs_job(job_file, tag, nnodes, configs, time, name, partition, qos, extra_args)
 
-def submit_jobs(configs, matrix_outside=None, matrix_inside=None, update_outside=None, update_inside=None, config_fn=None, tag=None, time=1, name=None, partition=None, qos=None, extra_args=None):
+
+def submit_jobs(configs, matrix_outside=None, matrix_inside=None, update_outside=None, update_inside=None,
+                config_fn=None, tag=None, time=1, name=None, partition=None, qos=None, extra_args=None):
     if matrix_inside is None:
         matrix_inside = []
     if matrix_outside is None:
@@ -212,7 +239,9 @@ def submit_jobs(configs, matrix_outside=None, matrix_inside=None, update_outside
         time_lb = get_platform_config("job_time_lb", common_config, 0)
         if time < time_lb:
             time = time_lb
-        submit_job("slurm.py", tag, common_config["nnodes"], configs_outside, time=time, name=name, partition=partition, qos=qos, extra_args=extra_args)
+        submit_job("slurm.py", tag, common_config["nnodes"], configs_outside, time=time, name=name, partition=partition,
+                   qos=qos, extra_args=extra_args)
+
 
 def flatten_configs(configs, matrix_outside, matrix_inside, update_outside=None, update_inside=None, config_fn=None):
     if not update_outside:
@@ -241,9 +270,11 @@ def flatten_configs(configs, matrix_outside, matrix_inside, update_outside=None,
                                   **dict(zip(matrix_inside, comb_inside))}
                         if config_fn is not None:
                             result = config_fn(result)
-                        configs_inside.append(result)
+                        if result is not None:
+                            configs_inside.append(result)
                 configs_outside.append(configs_inside)
     return configs_outside
+
 
 def dict_product(base, dicts1, dicts2):
     ret = []
@@ -255,11 +286,15 @@ def dict_product(base, dicts1, dicts2):
             ret.append(result)
     return ret
 
+
 def intersect_dicts(dicts):
     if type(dicts) is not list:
         return dicts
     common_keys = set.intersection(*map(set, dicts))
-    return {k:dicts[0][k] for k in common_keys}
+    return {k: dicts[0][k] for k in common_keys}
+
+
+from package_configs.package_config_base import *
 
 if __name__ == "__main__":
     spack_env_activate("hpx-lci")

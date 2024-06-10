@@ -1,5 +1,4 @@
 import os, sys
-import script_common
 
 class PlatformConfigBase:
     name = "None"
@@ -25,13 +24,13 @@ class PlatformConfigBase:
     def custom_env(self, config):
         return {}
 
-from platforms.platform_config_expanse import ExpanseConfig
-from platforms.platform_config_rostam import RostamConfig
-from platforms.platform_config_perlmutter import PerlmutterConfig
-from platforms.platform_config_polaris import PolarisConfig
-from platforms.platform_config_delta import DeltaConfig
-from platforms.platform_config_frontera import FronteraConfig
-from platforms.platform_config_ookami import OokamiConfig
+from platform_configs.platform_config_expanse import ExpanseConfig
+from platform_configs.platform_config_rostam import RostamConfig
+from platform_configs.platform_config_perlmutter import PerlmutterConfig
+from platform_configs.platform_config_polaris import PolarisConfig
+from platform_configs.platform_config_delta import DeltaConfig
+from platform_configs.platform_config_frontera import FronteraConfig
+from platform_configs.platform_config_ookami import OokamiConfig
 
 platformConfig = PlatformConfigBase()
 
